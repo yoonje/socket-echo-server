@@ -17,8 +17,6 @@ unistd.h
 -
 arpa/inet.h
 -
-sys/types.h
--
 sys/socket.h
 -
 

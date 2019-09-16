@@ -3,7 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
-#include <sys/types.h>
 #include <sys/socket.h>
 
 #define  BUFF_SIZE   1024
@@ -56,8 +55,8 @@ int main(void) {
             exit(1);
         }
 
-        while(1) {
-            if(read(client_socket, buff_rcv, BUFF_SIZE)==0){
+        while (1) {
+            if (read(client_socket, buff_rcv, BUFF_SIZE) == 0) {
                 break;
             }
             printf("receive: %s\n", buff_rcv);
