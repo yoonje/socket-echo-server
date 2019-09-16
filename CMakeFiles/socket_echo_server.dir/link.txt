@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/socket_echo_server.dir/main.c.o  -o socket_echo_server 
