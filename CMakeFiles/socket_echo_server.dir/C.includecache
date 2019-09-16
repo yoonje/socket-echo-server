@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yoonje/CLionProjects/socket_echo_server/main.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+unistd.h
+-
+arpa/inet.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+
