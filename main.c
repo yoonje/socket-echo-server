@@ -35,7 +35,7 @@ int main(void) {
         exit(1);
     }
 
-    if (-1 == listen(server_socket, 5)) {
+    if (-1 == listen(server_socket, 5)) { // backlog를 5로 설정하여 큐의 길이 할당
         printf("listen() 실행 실패\n");
         exit(1);
     }
