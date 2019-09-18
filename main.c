@@ -38,8 +38,8 @@ int main(void) {
         exit(1);
     }
 
-    while (1) { // 죽지 않는 서버를 만들기 위해 Outer 루프
-
+    while (1) { // 클라이언트의 요청을 반복적으로 받기 위한 Outer 루프
+                // Outer 루프가 없는 경우 1회만 통신이 됨
         memset(buff, 0, sizeof(buff)); // 0으로 초기화
 
         memset(&client_addr, 0, sizeof(client_addr)); // 0으로 초기화
@@ -52,8 +52,8 @@ int main(void) {
             exit(1);
         }
 
-        while (1) { // 클라이언트의 요청을 반복적으로 받기 위한 Inner 루프
-                    // Inner 루프가 없는 경우 서버가 죽음
+        while (1) { // 클라이언트의 요청을 waiting 하기 위한 Inner 루프
+                    // Inner 루프가 없는 경우 통신이 되지 않음
             if (read(client_socket, buff, BUFF_SIZE) == 0) { // 읽어온 데이터가 없는 경우 read 함수가 0 반환
                 break;
             }
