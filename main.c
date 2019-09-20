@@ -7,7 +7,8 @@
 
 #define  BUFF_SIZE   1024
 
-int main(void) {
+void
+main(void) {
     int server_socket;
     int client_socket;
     int client_addr_size;
@@ -53,13 +54,8 @@ int main(void) {
             exit(1);
         }
 
-        while (1) { // 클라이언트가 죽어도 반복으로 읽기 위한 Inner 루프
-                    // client가 segmentation fault로 죽어 접속이 끊기면 read 함수가 0 반환
-            if (read(client_socket, buff, BUFF_SIZE) == 0) {
-                break;
-            }
-            printf("receive: %s\n", buff);
-        }
-        close(client_socket);
+        read(client_socket, buff, BUFF_SIZE); // 메세지 read
+        printf("받은 메세지: %s\n", buff);
+        close(client_socket); // 소켓 닫기
     }
 }
