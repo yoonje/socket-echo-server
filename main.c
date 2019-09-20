@@ -17,16 +17,17 @@ int main(void) {
 
     char buff[BUFF_SIZE + 5];
 
-    server_socket = socket(PF_INET, SOCK_STREAM, 0); // PF_INET은 프로토콜 체계에서 IPv4, SOCK_STREAM은 TCP를 의미
-    if (-1 == server_socket) {
-        printf("server socket 생성 실패\n");
-        exit(1);
-    }
-
     memset(&server_addr, 0, sizeof(server_addr)); // 0으로 초기화
     server_addr.sin_family = AF_INET; // AF_INET은 주소 체계에서 IPv4를 의미
     server_addr.sin_port = htons(4000); // htons 함수를 통해서 Little Endian일 경우 Big Endian으로 변경하여 포트 번호 대입
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY); // INADDR_ANY로 설정하여 모든 IP의 요청을 받음
+
+    server_socket = socket(PF_INET, SOCK_STREAM, 0); // PF_INET은 프로토콜 체계에서 IPv4, SOCK_STREAM은 TCP를 의미
+
+    if (-1 == server_socket) {
+        printf("server socket 생성 실패\n");
+        exit(1);
+    }
 
     if (-1 == bind(server_socket, (struct sockaddr *) &server_addr, sizeof(server_addr))) {
         printf("bind() 실행 에러\n");
@@ -52,9 +53,9 @@ int main(void) {
             exit(1);
         }
 
-        while (1) { // 클라이언트의 요청을 waiting 하기 위한 Inner 루프
-                    // Inner 루프가 없는 경우 통신이 되지 않음
-            if (read(client_socket, buff, BUFF_SIZE) == 0) { // 읽어온 데이터가 없는 경우 read 함수가 0 반환
+        while (1) { // 클라이언트가 죽어도 반복으로 읽기 위한 Inner 루프
+                    // client가 segmentation fault로 죽어 접속이 끊기면 read 함수가 0 반환
+            if (read(client_socket, buff, BUFF_SIZE) == 0) {
                 break;
             }
             printf("receive: %s\n", buff);
