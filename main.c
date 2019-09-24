@@ -21,7 +21,7 @@ main(void) {
     memset(&server_addr, 0, sizeof(server_addr)); // 0으로 초기화
     server_addr.sin_family = AF_INET; // AF_INET은 주소 체계에서 IPv4를 의미
     server_addr.sin_port = htons(4000); // htons 함수를 통해서 Little Endian일 경우 Big Endian으로 변경하여 포트 번호 대입
-    server_addr.sin_addr.s_addr = htonl(INADDR_ANY); // INADDR_ANY로 설정하여 모든 IP의 요청을 받음
+    server_addr.sin_addr.s_addr = htonl(INADDR_ANY); // htonl 함수를 통해서 Little Endian일 경우 Big Endian으로 변경하여 INADDR_ANY로 설정하여 모든 IP의 요청을 받음
 
     server_socket = socket(PF_INET, SOCK_STREAM, 0); // PF_INET은 프로토콜 체계에서 IPv4, SOCK_STREAM은 TCP를 의미
 
